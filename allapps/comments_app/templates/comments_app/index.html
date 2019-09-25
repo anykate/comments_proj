@@ -1,0 +1,56 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}
+	MyAPP | Home
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<h1 class="text-center">Add Comments!</h1>
+		<form action="" method="POST">
+			{% csrf_token %}
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+							<img src="{% static 'proj/developer.jpg' %}" class="img-fluid" alt="Aniket Aryamane - developer of this project" height="200px">
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					{{ form.as_p }}
+					<input type="submit" class="btn btn-outline-primary" value="Add Comment"/>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+		</form>
+		<hr class="mb-5"/>
+		{% for obj in comment_obj %}
+			<div class="card mb-2">
+				<div class="card-body">
+					{{ obj.comment }}
+					<div class="float-right">
+						<small class="text-muted">
+							added on
+							{{ obj.date_added }}
+						</small>
+					</div>
+				</div>
+			</div>
+			{% empty %}
+			<div class="card mb-2">
+				<div class="card-body">
+					<h3>No comments!!</h3>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
+
+{% block extra_js %}
+	<script type="text/javascript">
+		{% comment %}Write your Extra javascript / jQuery block here ...{% endcomment %}
+	</script>
+{% endblock %}
